@@ -1,0 +1,171 @@
+wandb_version: 1
+
+CLAHE:
+  desc: null
+  value: 0
+Downscale:
+  desc: null
+  value: 0
+GridDistortion:
+  desc: null
+  value: 0
+HorizontalFlip:
+  desc: null
+  value: 0.5
+HueSaturationValue:
+  desc: null
+  value: 0
+ImageCompression:
+  desc: null
+  value: 0.01
+MotionBlur:
+  desc: null
+  value: 0
+RGBShift:
+  desc: null
+  value: 0
+RandomBrightnessContrast:
+  desc: null
+  value: 0
+RandomGamma:
+  desc: null
+  value: 0
+RandomResizedCrop:
+  desc: null
+  value: 0
+ShiftScaleRotate:
+  desc: null
+  value: 0.01
+ShiftScaleRotateMode:
+  desc: null
+  value: 4
+VerticalFlip:
+  desc: null
+  value: 0.5
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.6
+    framework: lightning
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    m:
+    - 1: trainer/global_step
+      6:
+      - 3
+    - 1: train/loss
+      5: 1
+      6:
+      - 1
+    - 1: train/acc
+      5: 1
+      6:
+      - 1
+    - 1: train/mIoU
+      5: 1
+      6:
+      - 1
+    - 1: epoch
+      5: 1
+      6:
+      - 1
+    - 1: val/loss
+      5: 1
+      6:
+      - 1
+    - 1: val/acc
+      5: 1
+      6:
+      - 1
+    - 1: val/mIoU
+      5: 1
+      6:
+      - 1
+    - 1: val/epoch_loss
+      5: 1
+      6:
+      - 1
+    - 1: val/epoch_acc
+      5: 1
+      6:
+      - 1
+    - 1: val/epoch_mIoU
+      5: 1
+      6:
+      - 1
+    - 1: train/epoch_loss
+      5: 1
+      6:
+      - 1
+    - 1: train/epoch_acc
+      5: 1
+      6:
+      - 1
+    - 1: train/epoch_mIoU
+      5: 1
+      6:
+      - 1
+    python_version: 3.8.8
+    start_time: 1636439127
+    t:
+      1:
+      - 1
+      - 5
+      - 9
+      3:
+      - 13
+      4: 3.8.8
+      5: 0.12.6
+      8:
+      - 5
+archi:
+  desc: null
+  value: UnetPlusPlus
+auto_batch_size:
+  desc: null
+  value: false
+backbone:
+  desc: null
+  value: efficientnet-b0
+batch_size:
+  desc: null
+  value: 16
+epochs:
+  desc: null
+  value: 100
+fp16:
+  desc: null
+  value: true
+gpus:
+  desc: null
+  value: 2
+img_size:
+  desc: null
+  value: 512
+learning_rate:
+  desc: null
+  value: 0.0001
+loss:
+  desc: null
+  value: ce
+num_workers:
+  desc: null
+  value: 4
+optimizer:
+  desc: null
+  value: adam
+pretrained_weights:
+  desc: null
+  value: imagenet
+scheduler:
+  desc: null
+  value: reducelr
+seed:
+  desc: null
+  value: 42
+train_datadir:
+  desc: null
+  value: /home/ubuntu/ml/train_dataset/train
+val_datadir:
+  desc: null
+  value: /home/ubuntu/ml/train_dataset/val
