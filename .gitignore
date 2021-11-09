@@ -132,3 +132,4 @@ dmypy.json
 data/*
 train_dataset/*
 data.zip
+wandb/*
