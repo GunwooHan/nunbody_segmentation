@@ -46,8 +46,8 @@ def label_to_color_image(label):
 
 
 if __name__ == '__main__':
-
-    model = SmpModel.load_from_checkpoint("./saved/Unet_timm-mobilenetv3_small_100-epoch=05-val/mIoU=0.23.ckpt",
+    model_path = 'saved/Unet_timm-tf_efficientnet_lite4-epoch=10-val/mIoU=0.05-v1.ckpt' 
+    model = SmpModel.load_from_checkpoint(model_path,
                                         args=args,
                                         train_transform=None,
                                         val_transform=None)
@@ -69,7 +69,9 @@ if __name__ == '__main__':
 
 
     for idx, img in enumerate(test_loader):
+        print(img)
         img = img[0].cuda()
+        
         output = model(img)
         iou_value = output.argmax(dim=1)
         print()
