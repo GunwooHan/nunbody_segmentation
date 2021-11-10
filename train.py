@@ -20,12 +20,12 @@ parser.add_argument('--gpus', type=int, default=1)
 parser.add_argument('--archi', type=str, default='Unet')
 parser.add_argument('--backbone', type=str, default='efficientnet-b6')
 parser.add_argument('--pretrained_weights', type=str, default='imagenet')
-parser.add_argument('--fp16', type=bool, default=True)
+parser.add_argument('--fp16', type=int, default=32)
 parser.add_argument('--num_workers', type=int, default=4)
 
 parser.add_argument('--img_size', type=int, default=512)
 parser.add_argument('--batch_size', type=int, default=16)
-parser.add_argument('--epochs', type=int, default=100)
+parser.add_argument('--epochs', type=int, default=50)
 parser.add_argument('--auto_batch_size', type=bool, default=False)
 parser.add_argument('--learning_rate', type=float, default=0.0001)
 parser.add_argument('--optimizer', type=str, default='adam')
@@ -61,21 +61,22 @@ if __name__ == '__main__':
         filename=f"{args.archi}_{args.backbone}"+"-{epoch:02d}-{val/mIoU:.2f}",
         save_top_k=1,
         mode="max",
+        save_weights_only=True
     )
-    early_stop_callback = EarlyStopping(monitor="val/loss", min_delta=0.00, patience=10, verbose=False, mode="min")
+    early_stop_callback = EarlyStopping(monitor="val/loss", min_delta=0.00, patience=5, verbose=False, mode="min")
 
     train_transform, val_transform = make_transform(args)
 
     model = SmpModel(args, train_transform, val_transform)
 
     trainer = pl.Trainer(gpus=args.gpus,
-                         precision=16 if args.fp16 else 32,
+                         precision=args.fp16,
                          max_epochs=args.epochs,
                          # log_every_n_steps=1,
                          accelerator='ddp',
                          # num_sanity_val_steps=0,
-                         # limit_train_batches=5,
-                         # limit_val_batches=2,
+                         # limit_train_batches=50,
+                         # limit_val_batches=10,
                          logger=wandb_logger,
                          callbacks=[checkpoint_callback, early_stop_callback])  # , callbacks=[SWA])
 

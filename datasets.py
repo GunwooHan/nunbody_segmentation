@@ -12,7 +12,7 @@ class PoseDataset(torch.utils.data.Dataset):
         self.mode = mode
         self.transform = transform
 
-        if mode == 'train' or 'val':
+        if mode == 'train' or mode =='val':
             self.images = os.listdir(os.path.join(data_dir, 'images'))
             self.masks = os.listdir(os.path.join(data_dir, 'masks'))
         elif mode == 'test':
@@ -22,7 +22,7 @@ class PoseDataset(torch.utils.data.Dataset):
         return len(self.images)
 
     def __getitem__(self, item):
-        if self.mode == 'train' or 'val':
+        if self.mode == 'train' or self.mode =='val':
             img = cv2.imread(os.path.join(self.data_dir, 'images', self.images[item]))
             mask = cv2.imread(os.path.join(self.data_dir, 'masks', self.masks[item]), 0)
 
@@ -40,9 +40,9 @@ class PoseDataset(torch.utils.data.Dataset):
             if self.transform is not None:
                 transformed = self.transform(image=img)
                 img = transformed["image"]
-                return img
+                return img, self.images[item]
 
-            return img
+            return img, self.images[item]
 
         # h,w,c = img.shape
         # h_flag = h%2==1

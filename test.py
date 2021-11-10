@@ -14,9 +14,10 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default=42)
 # parser.add_argument('--train_datadir', type=str, default='data/train')
-parser.add_argument('--test_datadir', type=str, default='data/val')
+parser.add_argument('--data_path', type=str, default='data/val/images')
+parser.add_argument('--save_path', type=str, default='result')
 parser.add_argument('--archi', type=str, default='Unet')
-parser.add_argument('--backbone', type=str, default='timm-mobilenetv3_small_100')
+parser.add_argument('--backbone', type=str, default='timm-tf_efficientnet_lite4')
 parser.add_argument('--pretrained_weights', type=str, default=None)
 parser.add_argument('--color_output', type=bool, default=True)
 
@@ -47,13 +48,13 @@ def label_to_color_image(label):
 
 if __name__ == '__main__':
 
-    model = SmpModel.load_from_checkpoint("./saved/Unet_timm-mobilenetv3_small_100-epoch=05-val/mIoU=0.23.ckpt",
+    model = SmpModel.load_from_checkpoint("./saved/Unet_timm-tf_efficientnet_lite4-epoch=98-val/mIoU=0.82.ckpt",
                                         args=args,
                                         train_transform=None,
                                         val_transform=None)
 
     test_transform = A.Compose([
-        # A.Resize(512, 512),
+        A.Resize(512, 512),
         A.Normalize(
             mean=[0.4914, 0.4822, 0.4465],
             std=[0.2471, 0.2435, 0.2616],
@@ -61,23 +62,28 @@ if __name__ == '__main__':
         ToTensorV2()
     ])
 
-    test_dataset = PoseDataset(args.test_datadir, 'test', transform=test_transform)
+    test_dataset = PoseDataset(args.data_path, 'test', transform=test_transform)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=1, num_workers=4)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = model.cuda()
 
 
-    for idx, img in enumerate(test_loader):
-        img = img[0].cuda()
+    for idx, (img, filename) in enumerate(test_loader):
+        img = img.cuda()
         output = model(img)
         iou_value = output.argmax(dim=1)
-        print()
         target_mask = iou_value[0].detach().cpu().numpy()
         
+        orig_img = cv2.imread(os.path.join(args.data_path, filename[0]))
+        h, w, c = orig_img.shape
+        target_mask = target_mask.astype(np.uint8)
+        target_mask = cv2.resize(target_mask, (w,h), interpolation=cv2.INTER_NEAREST)
+
+        filename = filename[0].split('.')[0]
         if args.color_output:
             color_output = label_to_color_image(target_mask)
-            cv2.imwrite(f'result/{idx:04d}.png', color_output)
+            cv2.imwrite(f'{args.save_path}/{filename}.png', color_output)
         else:
-            cv2.imwrite(f'result/{idx:04d}.png', target_mask)
-        break
+            cv2.imwrite(f'{args.save_path}/{filename}.png', target_mask)
+        # break

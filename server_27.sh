@@ -25,5 +25,64 @@
 #python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b5
 #python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b6
 #python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b7
-python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b6
-python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b5
+#python train.py --gpus 2 --ShiftScaleRotate 0.1 --ImageCompression 0.1 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b6
+#python train.py --gpus 2 --ShiftScaleRotate 0.1 --ImageCompression 0.1 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b5
+#python train.py --gpus 2 --ShiftScaleRotate 0.2 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone timm-tf_efficientnet_lite4 --train_datadir data/train_all
+#python train.py --gpus 2 --ShiftScaleRotate 0.2 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone timm-tf_efficientnet_lite4 --train_datadir data/train
+#python train.py --gpus 2 --ShiftScaleRotate 0.2 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone timm-tf_efficientnet_lite4 --fp16 32 --train_datadir data/train_all
+#python train.py --gpus 2 --ShiftScaleRotate 0.2 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone timm-tf_efficientnet_lite4 --fp16 32 --train_datadir data/train
+
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi UnetPlusPlus --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi MAnet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Linknet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi FPN --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi PSPNet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi PAN --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi DeepLabV3 --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+python train.py --gpus 2 --archi DeepLabV3Plus --backbone efficientnet-b4 --fp16 16 --train_datadir data/train --ShiftScaleRotate 0.2 --ImageCompression 0.01
+python train.py --gpus 2 --archi DeepLabV3Plus --backbone efficientnet-b4 --fp16 16 --train_datadir data/train_all --ShiftScaleRotate 0.2 --ImageCompression 0.01
+#python train.py --gpus 2 --archi DeepLabV3Plus --backbone timm-regnetx_064 --fp16 16 --train_datadir data/train
+
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
+#python train.py --gpus 2 --archi Unet --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
