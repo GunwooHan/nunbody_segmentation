@@ -52,7 +52,7 @@ args = parser.parse_args()
 if __name__ == '__main__':
     # SWA = pl.callbacks.StochasticWeightAveraging(swa_epoch_start=0.8, swa_lrs=0.001, annealing_epochs=5, annealing_strategy='cos')
     pl.seed_everything(args.seed)
-    wandb_logger = WandbLogger(project='NunBody', name=f'{args.backbone}_{args.archi}')
+    wandb_logger = WandbLogger(project='NunBody', name=f'{args.backbone}_{args.archi}_CLAHE_SEED{args.seed}_YH')
     wandb_logger.log_hyperparams(args)
 
     checkpoint_callback = ModelCheckpoint(
@@ -62,6 +62,7 @@ if __name__ == '__main__':
         save_top_k=1,
         mode="max",
     )
+
     early_stop_callback = EarlyStopping(monitor="val/loss", min_delta=0.00, patience=10, verbose=False, mode="min")
 
     train_transform, val_transform = make_transform(args)
@@ -78,6 +79,4 @@ if __name__ == '__main__':
                          # limit_val_batches=2,
                          logger=wandb_logger,
                          callbacks=[checkpoint_callback, early_stop_callback])  # , callbacks=[SWA])
-
     trainer.fit(model)
-
