@@ -133,3 +133,7 @@ data/*
 train_dataset/*
 data.zip
 wandb/*
+result/*
+test/*
+*.png
+*.jpg
