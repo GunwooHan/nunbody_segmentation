@@ -15,10 +15,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--seed', type=int, default=42)
 # parser.add_argument('--train_datadir', type=str, default='data/train')
 # parser.add_argument('--data_path', type=str, default='data/val/images')
-parser.add_argument('--data_path', type=str, default='psuedo_01')
+parser.add_argument('--data_path', type=str, default='unseen')
 parser.add_argument('--save_path', type=str, default='result')
 parser.add_argument('--archi', type=str, default='DeepLabV3Plus')
-parser.add_argument('--backbone', type=str, default='efficientnet-b4')
+parser.add_argument('--backbone', type=str, default='se_resnext101_32x4d')
 parser.add_argument('--pretrained_weights', type=str, default=None)
 parser.add_argument('--color_output', type=bool, default=True)
 
@@ -49,19 +49,20 @@ def label_to_color_image(label):
 
 if __name__ == '__main__':
 
-    model = SmpModel.load_from_checkpoint("./saved/DeepLabV3Plus_efficientnet-b4-epoch=22-val/mIoU=0.78.ckpt",
+    model = SmpModel.load_from_checkpoint("saved/DeepLabV3Plus_se_resnext101_32x4d_train_all_epoch=03_val/mIoU=0.70.ckpt",
                                         args=args,
                                         train_transform=None,
                                         val_transform=None)
 
     test_transform = A.Compose([
-        A.Resize(512, 512),
+        A.Resize(1024, 1024),
         A.Normalize(
             mean=[0.4914, 0.4822, 0.4465],
             std=[0.2471, 0.2435, 0.2616],
         ),
         ToTensorV2()
     ])
+
 
     test_dataset = PoseDataset(args.data_path, 'test', transform=test_transform)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=1, num_workers=4)
@@ -71,8 +72,10 @@ if __name__ == '__main__':
     model.eval()
 
     for idx, (img, filename) in enumerate(test_loader):
-        img = img.cuda()
-        output = model(img)
+        inputs = img.cuda()
+        # tta_output = 
+
+        output = model(inputs)
         iou_value = output.argmax(dim=1)
         target_mask = iou_value[0].detach().cpu().numpy()
         
@@ -84,7 +87,8 @@ if __name__ == '__main__':
         filename = filename[0].split('.')[0]
         if args.color_output:
             color_output = label_to_color_image(target_mask)
-            cv2.imwrite(f'{args.save_path}/{filename}.png', color_output)
+            blended = cv2.addWeighted(orig_img, 0.5, color_output, (0.5), 0) 
+            cv2.imwrite(f'{args.save_path}/{filename}.png', blended)
         else:
             cv2.imwrite(f'{args.save_path}/{filename}.png', target_mask)
         # break
