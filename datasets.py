@@ -13,8 +13,8 @@ class PoseDataset(torch.utils.data.Dataset):
         self.transform = transform
 
         if mode == 'train' or 'val':
-            self.images = os.listdir(os.path.join(data_dir, 'images'))
-            self.masks = os.listdir(os.path.join(data_dir, 'masks'))
+            self.images = sorted(os.listdir(os.path.join(data_dir, 'images')))
+            self.masks = sorted(os.listdir(os.path.join(data_dir, 'masks')))
         elif mode == 'test':
             self.images = os.listdir(os.path.join(data_dir))
 

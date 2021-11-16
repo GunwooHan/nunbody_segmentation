@@ -218,7 +218,7 @@ def main(model,
         for index, data in tqdm(enumerate(loader)):
             img_hist = np.zeros((n_class, n_class))
             img = data[0][0].cuda()
-            model.eval()
+            # model.eval()
             
             outs = model(img)
             oms = outs.argmax(dim=1).detach().cpu().numpy()

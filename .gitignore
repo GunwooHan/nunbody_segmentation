@@ -2,6 +2,10 @@ data
 test
 wandb
 saved
+data_1
+test_1
+check
+val_check
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

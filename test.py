@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default=42)
 # parser.add_argument('--train_datadir', type=str, default='data/train')
-parser.add_argument('--test_datadir', type=str, default='data/val')
+parser.add_argument('--test_datadir', type=str, default='data/train')
 parser.add_argument('--archi', type=str, default='Unet')
 parser.add_argument('--backbone', type=str, default='timm-mobilenetv3_small_100')
 parser.add_argument('--pretrained_weights', type=str, default=None)
@@ -53,7 +53,7 @@ if __name__ == '__main__':
                                         val_transform=None)
 
     test_transform = A.Compose([
-        # A.Resize(512, 512),
+        A.Resize(512, 512),
         A.Normalize(
             mean=[0.4914, 0.4822, 0.4465],
             std=[0.2471, 0.2435, 0.2616],
@@ -61,17 +61,15 @@ if __name__ == '__main__':
         ToTensorV2()
     ])
 
-    test_dataset = PoseDataset(args.test_datadir, 'test', transform=test_transform)
+    test_dataset = PoseDataset(args.test_datadir, 'train', transform=test_transform)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=1, num_workers=4)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = model.cuda()
 
-
     for idx, img in enumerate(test_loader):
-        print(img)
+        print(img[0].size(),img[1].size())
         img = img[0].cuda()
-        
         output = model(img)
         iou_value = output.argmax(dim=1)
         print()

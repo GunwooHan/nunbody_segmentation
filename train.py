@@ -20,7 +20,7 @@ parser.add_argument('--gpus', type=int, default=1)
 parser.add_argument('--archi', type=str, default='Unet')
 parser.add_argument('--backbone', type=str, default='efficientnet-b6')
 parser.add_argument('--pretrained_weights', type=str, default='imagenet')
-parser.add_argument('--fp16', type=bool, default=True)
+parser.add_argument('--fp16', type=bool, default=False)
 parser.add_argument('--num_workers', type=int, default=4)
 
 parser.add_argument('--img_size', type=int, default=512)
@@ -52,13 +52,13 @@ args = parser.parse_args()
 if __name__ == '__main__':
     # SWA = pl.callbacks.StochasticWeightAveraging(swa_epoch_start=0.8, swa_lrs=0.001, annealing_epochs=5, annealing_strategy='cos')
     pl.seed_everything(args.seed)
-    wandb_logger = WandbLogger(project='NunBody', name=f'{args.backbone}_{args.archi}_CLAHE_SEED{args.seed}_YH')
+    wandb_logger = WandbLogger(project='NunBody', name=f'{args.backbone}_{args.archi}_FP32_YH')
     wandb_logger.log_hyperparams(args)
 
     checkpoint_callback = ModelCheckpoint(
         monitor="val/mIoU",
         dirpath="saved",
-        filename=f"{args.archi}_{args.backbone}"+"-{epoch:02d}-{val/mIoU:.2f}",
+        filename=f"{args.archi}_{args.backbone}"+"-{epoch:02d}-{val_mIoU:.2f}",
         save_top_k=1,
         mode="max",
     )
