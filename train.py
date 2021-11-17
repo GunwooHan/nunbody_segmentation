@@ -33,6 +33,8 @@ parser.add_argument('--scheduler', type=str, default='reducelr')
 parser.add_argument('--loss', type=str, default='ce')
 
 parser.add_argument('--RandomBrightnessContrast', type=float, default=0)
+parser.add_argument('--RandomScale', type=float, default=0)
+parser.add_argument('--ElasticTransform', type=float, default=0)
 parser.add_argument('--HueSaturationValue', type=float, default=0)
 parser.add_argument('--RGBShift', type=float, default=0)
 parser.add_argument('--RandomGamma', type=float, default=0)
@@ -52,7 +54,7 @@ args = parser.parse_args()
 if __name__ == '__main__':
     # SWA = pl.callbacks.StochasticWeightAveraging(swa_epoch_start=0.8, swa_lrs=0.001, annealing_epochs=5, annealing_strategy='cos')
     pl.seed_everything(args.seed)
-    wandb_logger = WandbLogger(project='NunBody', name=f'{args.backbone}_{args.archi}_JH')
+    wandb_logger = WandbLogger(project='NunBody', name=f'{args.backbone}_{args.archi}_augtest_JH')
     wandb_logger.log_hyperparams(args)
 
     checkpoint_callback = ModelCheckpoint(
@@ -61,8 +63,9 @@ if __name__ == '__main__':
         filename=f"{args.archi}_{args.backbone}"+"-{epoch:02d}-{val/mIoU:.2f}",
         save_top_k=1,
         mode="max",
+        save_weights_only=True,
     )
-    early_stop_callback = EarlyStopping(monitor="val/loss", min_delta=0.00, patience=10, verbose=False, mode="min")
+    early_stop_callback = EarlyStopping(monitor="val/mIoU", min_delta=0.00, patience=10, verbose=False, mode="max")
 
     train_transform, val_transform = make_transform(args)
 

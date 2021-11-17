@@ -14,8 +14,8 @@ def make_transform(args):
 
     train_transform = []
     #
-    # if args.RandomScale:
-    #     train_transform.append(A.RandomScale([0.5, 2], p=1))
+    if args.RandomScale:
+        train_transform.append(A.RandomScale([0.5, 2], p=1))
 
         # RandomBrightnessContrast, HueSaturationValue, RGBShift, RandomGamma 모두 색상/밝기/감마/대비 변경
     if args.CLAHE:
@@ -34,6 +34,12 @@ def make_transform(args):
         train_transform.append(A.HueSaturationValue(hue_shift_limit=20,
                                                     sat_shift_limit=30,
                                                     val_shift_limit=20,
+                                                    p=0.01
+                                                    ))
+    if args.ElasticTransform:
+        train_transform.append(A.ElasticTransform(alpha=1.0,
+                                                    sigma=50.0,
+                                                    alpha_affine=50.0,
                                                     p=0.01
                                                     ))
     if args.RGBShift:
@@ -73,13 +79,17 @@ def make_transform(args):
                                                    width=args.img_size,
                                                    scale=(0.15, 1.0),
                                                    ratio=(0.75, 1.3333333333333333),
-                                                   p=0.01
+                                                   p=0.2
                                                    ))
     if args.ImageCompression:
         train_transform.append(A.ImageCompression(quality_lower=99,
                                                   quality_upper=100,
                                                   p=0.01
                                                   ))
+    # if args.RandomScale:
+    #     train_transform.append(A.RandomScale(always_apply=False,
+    #                                         p=0.2, interpolation=0,
+    #                                         scale_limit=(0.3,1.5)))
     train_transform.extend(base_transform)
 
     train_transform = A.Compose(train_transform)
