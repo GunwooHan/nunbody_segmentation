@@ -20,6 +20,7 @@ parser.add_argument('--save_path', type=str, default='result')
 parser.add_argument('--archi', type=str, default='DeepLabV3Plus')
 parser.add_argument('--backbone', type=str, default='efficientnet-b4')
 parser.add_argument('--pretrained_weights', type=str, default=None)
+parser.add_argument('--load_weights', type=str, default=None)
 parser.add_argument('--color_output', type=bool, default=True)
 
 args = parser.parse_args()
@@ -49,7 +50,9 @@ def label_to_color_image(label):
 
 if __name__ == '__main__':
 
-    model = SmpModel.load_from_checkpoint("./saved/DeepLabV3Plus_efficientnet-b4-epoch=22-val/mIoU=0.78.ckpt",
+    # model = SmpModel.load_from_checkpoint("./saved/DeepLabV3Plus_efficientnet-b4-epoch=22-val/mIoU=0.78.ckpt",
+    model_path = args.load_weights # 'saved/Unet_timm-tf_efficientnet_lite4-epoch=10-val/mIoU=0.05-v1.ckpt'
+    model = SmpModel.load_from_checkpoint(model_path,
                                         args=args,
                                         train_transform=None,
                                         val_transform=None)

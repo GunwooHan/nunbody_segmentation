@@ -4,6 +4,10 @@ from albumentations.pytorch.transforms import ToTensorV2
 
 def make_transform(args):
     base_transform = [
+        # A.CLAHE(clip_limit=(1, 4),
+        #                     tile_grid_size=(8, 8),
+        #                     p=1.0
+        #                     ),
         A.Resize(args.img_size, args.img_size),
         A.Normalize(
             mean=[0.4914, 0.4822, 0.4465],
