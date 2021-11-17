@@ -42,6 +42,4 @@
 #python train.py --gpus 2 --archi DeepLabV3 --backbone timm-tf_efficientnet_lite4 --fp16 16 --train_datadir data/train
 #python train.py --gpus 2 --archi DeepLabV3Plus --backbone timm-regnetx_064 --fp16 16 --train_datadir data/train
 
-#python train.py --gpus 2 --archi PAN --backbone se_resnext101_32x4d --fp16 16 --train_datadir data/train --ShiftScaleRotate 0.2 --ImageCompression 0.2 --name train_PAN
-
-python train.py --gpus 2 --archi DeepLabV3Plus --backbone efficientnet-b4 --train_datadir data/train
+python train.py --gpus 2 --archi DeepLabV3Plus --backbone se_resnext101_32x4d --fp16 16 --train_datadir data/train_all --ShiftScaleRotate 0.9 --ImageCompression 0.1 --GridDistortion 0.1

@@ -15,10 +15,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--seed', type=int, default=42)
 # parser.add_argument('--train_datadir', type=str, default='data/train')
 # parser.add_argument('--data_path', type=str, default='data/val/images')
-parser.add_argument('--data_path', type=str, default='unseen')
+parser.add_argument('--data_path', type=str, default='data/val/images')
 parser.add_argument('--save_path', type=str, default='result')
 parser.add_argument('--archi', type=str, default='DeepLabV3Plus')
-parser.add_argument('--backbone', type=str, default='se_resnext101_32x4d')
+parser.add_argument('--backbone', type=str, default='efficientnet-b4')
 parser.add_argument('--pretrained_weights', type=str, default=None)
 parser.add_argument('--color_output', type=bool, default=True)
 
@@ -49,7 +49,7 @@ def label_to_color_image(label):
 
 if __name__ == '__main__':
 
-    model = SmpModel.load_from_checkpoint("saved/DeepLabV3Plus_se_resnext101_32x4d_train_all_epoch=03_val/mIoU=0.70.ckpt",
+    model = SmpModel.load_from_checkpoint("saved/model.ckpt",
                                         args=args,
                                         train_transform=None,
                                         val_transform=None)
