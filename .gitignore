@@ -6,6 +6,7 @@ data_1
 test_1
 check
 val_check
+data_back
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
