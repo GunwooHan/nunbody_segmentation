@@ -139,3 +139,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Dataset
+data
+wandb
+result
+test
+saved
+*.png
+*.jpg
+*.zip
+5_fold
