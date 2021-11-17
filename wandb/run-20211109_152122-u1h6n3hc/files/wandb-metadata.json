@@ -1,0 +1,39 @@
+{
+    "os": "Linux-4.4.0-176-generic-x86_64-with-glibc2.10",
+    "python": "3.8.8",
+    "heartbeatAt": "2021-11-09T06:21:23.483492",
+    "startedAt": "2021-11-09T06:21:22.424942",
+    "docker": null,
+    "gpu": "Quadro RTX 6000",
+    "gpu_count": 2,
+    "cpu_count": 16,
+    "cuda": "10.0.130.1",
+    "args": [
+        "--gpus",
+        "2",
+        "--ShiftScaleRotate",
+        "0.01",
+        "--ImageCompression",
+        "0.01",
+        "--HorizontalFlip",
+        "0.5",
+        "--VerticalFlip",
+        "0.5",
+        "--archi",
+        "UnetPlusPlus",
+        "--backbone",
+        "efficientnet-b0"
+    ],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "https://github.com/GunwooHan/nunbody_segmentation.git",
+        "commit": "2670706c9b35c8fa84a0857dec064c0efa44c4df"
+    },
+    "email": null,
+    "root": "/home/ubuntu/ml/nunbody_segmentation",
+    "host": "nipa2021-38646",
+    "username": "ubuntu",
+    "executable": "/home/ubuntu/anaconda3/envs/nunbody/bin/python"
+}
