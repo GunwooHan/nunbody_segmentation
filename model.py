@@ -65,7 +65,7 @@ class SmpModel(pl.LightningModule):
         return {"optimizer": optimizer, "lr_scheduler": scheduler, "monitor": "val/mIoU"}
 
     def training_step(self, train_batch, batch_idx):
-        image, mask = train_batch
+        image, mask, name = train_batch
         outputs = self.model(image)
         loss = self.criterion(outputs, mask)
         iou_value = iou(outputs.argmax(dim=1), mask)
@@ -78,7 +78,7 @@ class SmpModel(pl.LightningModule):
         return {"loss": loss, "IoU": iou_value, "acc": acc_value}
 
     def validation_step(self, val_batch, batch_idx):
-        image, mask = val_batch
+        image, mask, name = val_batch
         outputs = self.model(image)
         loss = self.criterion(outputs, mask)
         iou_value = iou(outputs.argmax(dim=1), mask)

@@ -1,1 +1,0 @@
-python test_modified.py --seed 42 --archi DeepLabV3Plus --backbone efficientnet-b0 --load_weights [result]_test_deeplabv3+_puredata/DeepLabV3Plus_efficientnet-b0-epoch=29-val_mIoU=0.00.ckpt --test_datadir data/val

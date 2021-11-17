@@ -30,9 +30,9 @@ class PoseDataset(torch.utils.data.Dataset):
                 transformed = self.transform(image=img, mask=mask)
                 img = transformed["image"]
                 mask = transformed["mask"]
-                return img, mask.long()
+                return img, mask.long(), self.images[item]
 
-            return img, mask
+            return img, mask, self.images[item]
 
         elif self.mode == 'test':
             img = cv2.imread(os.path.join(self.data_dir, self.images[item]))
