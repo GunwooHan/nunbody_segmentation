@@ -27,4 +27,4 @@
 #python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b7
 # python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b6
 # python train.py --gpus 2 --ShiftScaleRotate 0.01 --ImageCompression 0.01 --HorizontalFlip 0.5 --VerticalFlip 0.5 --backbone efficientnet-b5
-python train.py --gpus 2 --backbone timm-tf_efficientnet_lite4 --archi DeepLabV3Plus
+python train.py --gpus 2 --backbone efficientnet-b0 --archi DeepLabV3Plus

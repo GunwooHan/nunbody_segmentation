@@ -65,7 +65,7 @@ if __name__ == "__main__":
         mode="max",
     )
     early_stop_callback = EarlyStopping(
-        monitor="val/loss", min_delta=0.00, patience=10, verbose=False, mode="min"
+        monitor="val/loss", min_delta=0.00, patience=100, verbose=False, mode="min"
     )
 
     train_transform, val_transform = make_transform(args)
