@@ -102,9 +102,9 @@ class SmpModel(pl.LightningModule):
             total_iou += outputs[idx]['IoU'].item()
             total_acc += outputs[idx]['acc'].item()
 
-        self.log('train/epoch_loss', total_loss / iter_count)
-        self.log('train/epoch_acc', total_acc / iter_count)
-        self.log('train/epoch_mIoU', total_iou / iter_count)
+        self.log('train/loss_epoch', total_loss / iter_count)
+        self.log('train/acc_epoch', total_acc / iter_count)
+        self.log('train/mIoU_epoch', total_iou / iter_count)
 
     def validation_epoch_end(self, outputs):
         total_loss = 0.0

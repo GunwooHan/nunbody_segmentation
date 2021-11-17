@@ -14,10 +14,11 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default=42)
 # parser.add_argument('--train_datadir', type=str, default='data/train')
-parser.add_argument('--test_datadir', type=str, default='data/train')
+parser.add_argument('--test_datadir', type=str, default='data/val')
 parser.add_argument('--archi', type=str, default='Unet')
 parser.add_argument('--backbone', type=str, default='timm-mobilenetv3_small_100')
 parser.add_argument('--pretrained_weights', type=str, default=None)
+parser.add_argument('--load_weights', type=str, default=None)
 parser.add_argument('--color_output', type=bool, default=True)
 
 args = parser.parse_args()
@@ -46,7 +47,7 @@ def label_to_color_image(label):
 
 
 if __name__ == '__main__':
-    model_path = 'saved/Unet_timm-tf_efficientnet_lite4-epoch=10-val/mIoU=0.05-v1.ckpt' 
+    model_path = args.load_weights # 'saved/Unet_timm-tf_efficientnet_lite4-epoch=10-val/mIoU=0.05-v1.ckpt' 
     model = SmpModel.load_from_checkpoint(model_path,
                                         args=args,
                                         train_transform=None,
@@ -61,18 +62,17 @@ if __name__ == '__main__':
         ToTensorV2()
     ])
 
-    test_dataset = PoseDataset(args.test_datadir, 'train', transform=test_transform)
+    test_dataset = PoseDataset(args.test_datadir, 'val', transform=test_transform)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=1, num_workers=4)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = model.cuda()
-
+    model.eval()
+    
     for idx, img in enumerate(test_loader):
-        print(img[0].size(),img[1].size())
-        img = img[0].cuda()
-        output = model(img)
+        image = img[0].cuda()
+        output = model(image)
         iou_value = output.argmax(dim=1)
-        print()
         target_mask = iou_value[0].detach().cpu().numpy()
         
         if args.color_output:
