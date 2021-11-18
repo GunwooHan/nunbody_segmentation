@@ -123,7 +123,7 @@ class SmpModel(pl.LightningModule):
     #     self.log('val/epoch_mIoU', total_iou / iter_count)
 
     def train_dataloader(self):
-        return torch.utils.data.DataLoader(self.train_data, batch_size=self.batch_size, num_workers=self.args.num_workers, shuffle=True)
+        return torch.utils.data.DataLoader(self.train_data, batch_size=self.batch_size, num_workers=self.args.num_workers, shuffle=True, drop_last=True)
 
     def val_dataloader(self):
         return torch.utils.data.DataLoader(self.val_data, batch_size=self.batch_size, num_workers=self.args.num_workers)
