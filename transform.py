@@ -1,5 +1,55 @@
+import numpy as np
 import albumentations as A
 from albumentations.pytorch.transforms import ToTensorV2
+from albumentations.core.transforms_interface import DualTransform
+
+
+class PoseHorizontalFlip(DualTransform):
+    def __init__(self, always_apply=False, p=1):
+        super().__init__(always_apply, p)
+        self.transform = A.HorizontalFlip(always_apply=True)
+
+    def apply(self, img, **params):
+        # print(img.shape)
+        if len(img.shape) == 2:
+            mask = self.transform(image=img)['image']
+
+            temp_mask = np.zeros_like(mask)
+
+            temp_mask[mask == 1] = 1
+            temp_mask[mask == 14] = 14
+
+            # hand
+            temp_mask[mask == 2] = 3
+            temp_mask[mask == 3] = 2
+
+            # foot
+            temp_mask[mask == 4] = 5
+            temp_mask[mask == 5] = 4
+
+            # thigh
+            temp_mask[mask == 6] = 7
+            temp_mask[mask == 7] = 6
+
+            # calf
+            temp_mask[mask == 6] = 7
+            temp_mask[mask == 7] = 6
+
+            # thigh
+            temp_mask[mask == 8] = 9
+            temp_mask[mask == 9] = 8
+
+            # thigh
+            temp_mask[mask == 10] = 11
+            temp_mask[mask == 11] = 10
+
+            # thigh
+            temp_mask[mask == 12] = 13
+            temp_mask[mask == 13] = 12
+            return temp_mask
+        else:
+            img = self.transform(image=img)['image']
+            return img
 
 
 def make_transform(args):
@@ -61,7 +111,7 @@ def make_transform(args):
                                              p=args.RandomGamma
                                              ))
     if args.HorizontalFlip:
-        train_transform.append(A.HorizontalFlip(p=args.HorizontalFlip))
+        train_transform.append(A.PoseHorizontalFlip(p=args.HorizontalFlip))
 
     if args.VerticalFlip:
         train_transform.append(A.VerticalFlip(p=args.VerticalFlip))
