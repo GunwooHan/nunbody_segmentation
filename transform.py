@@ -111,7 +111,7 @@ def make_transform(args):
                                              p=args.RandomGamma
                                              ))
     if args.HorizontalFlip:
-        train_transform.append(A.PoseHorizontalFlip(p=args.HorizontalFlip))
+        train_transform.append(PoseHorizontalFlip(p=args.HorizontalFlip))
 
     if args.VerticalFlip:
         train_transform.append(A.VerticalFlip(p=args.VerticalFlip))
