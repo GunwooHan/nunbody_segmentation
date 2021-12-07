@@ -1,3 +1,15 @@
+data
+test
+wandb
+saved
+data_1
+test_1
+check
+val_check
+data_back
+result
+saved
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +139,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Dataset
+data
+wandb
+result
+test
+saved
+*.png
+*.jpg
+*.zip
+5_fold
