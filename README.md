@@ -146,8 +146,8 @@ conda create -n nunbody python=3.8.8 -y && conda activate nunbody && pip install
     - 여러 옵션으로 테스트 하였으나 TTA 종류나 강도를 추가할 경우, 왼쪽, 오른쪽 구별 성능이 오히려 떨어지는 것을 확인함
     - 기본적인 noise만 제거하기 위해 Gamma와 시너지를 낼 수 있도록 pixel 값에 multiply(0.9, 1.0, 1.1)만 적용함
 
-9. __CRF__  
-    <img src="https://images.velog.io/images/hanlyang0522/post/259ed3a7-94dc-4d0d-a09b-8dad23f57cda/image.png"  width="70%" height="40%"/>
+9. __CRF__    
+     <img src="https://images.velog.io/images/hanlyang0522/post/64c0d868-6c11-4afa-9145-6fd77a633293/image.png"  width="70%" height="40%"/>
 
     - CRF 적용을 시도했으나 annotation이 background와 color가 유사해 CRF의 영향을 받아 삭제되는 현상이 발생했고, 삭제되지 않은 부분에 대해서는 디테일하게 annotation이 적용되는 점을 확인할 수 있었음. 하지만 이번 대회에서는 적용시켰을 때에 손실량이 컸기 때문에 적용하지 않았음. 
 ---
